@@ -36,8 +36,6 @@
 #include <thread>
 #include <atomic>
 
-std::mutex recvMutex;
-
 std::vector<int> clientUIDs(1000000);
 
 std::unordered_map<int, glm::vec3> playerPositions;
@@ -841,56 +839,8 @@ int main(int argc, char* argv[]) {
 
     int uid;
     std::thread([&]() {
-        if (!isServer) {
-            char buffer[8192];
-            std::lock_guard<std::mutex> lock(recvMutex);
-            int bytes = recv(client_fd, buffer, sizeof(buffer), 0);
-            if (bytes > 0) {
-                std::string msg(buffer, bytes);
-                std::cout << "RECEIVED MESSAGE: " << msg << std::endl;
-
-                std::vector<std::string> tokens;
-                std::stringstream ss(msg);
-                std::string item;
-
-                while (std::getline(ss, item, ';')) {
-                    if (!item.empty())
-                        tokens.push_back(item);
-                }
-
-                for (size_t i = 0; i < tokens.size();) {
-                    const std::string& token = tokens[i];
-
-                    if (token == "UID" && i + 1 < tokens.size()) {
-                        uid = std::stoi(tokens[i + 1]);
-                        clientUIDs[uid] = uid;
-                        std::cout << "my UID is " << uid << " bruh\n";
-                        i += 2;
-                    } else if ((token == "SUN" || token == "EARTH" || token == "MOON") && i + 3 < tokens.size()) {
-                        int planetIndex = containsPlanetData(token + ";");
-                        std::cout << "Parsing planet position for " << token << " (planet index: " << planetIndex << ")\n";
-
-                        float x = std::stof(tokens[i + 1]);
-                        float y = std::stof(tokens[i + 2]);
-                        float z = std::stof(tokens[i + 3]);
-
-                        std::cout << "Setting position (" << x << ", " << y << ", " << z << ") for " << token << std::endl;
-
-                        std::lock_guard<std::mutex> lock(planetPositionsMutex);
-                        planetPositions[planetIndex] = glm::vec3(x, y, z);
-
-                        i += 4;
-                    }
-                    else {
-                        std::cerr << "Error: unknown argument: " << token << "\n";
-                        i++;
-                    }
-                }
-            }
-
+        if (!isServer)
             handleClient(client_fd, uid);
-            std::cout << ":|\n";
-        }
     }).detach();
 
     if (!isServer) {

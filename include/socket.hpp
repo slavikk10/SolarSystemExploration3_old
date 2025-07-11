@@ -12,7 +12,7 @@
 #include <glm/gtc/matrix_transform.hpp>
 #include <glm/gtc/type_ptr.hpp>
 
-extern std::mutex recvMutex;
+extern std::vector<int> clientUIDs;
 
 std::vector<int> clients;
 std::mutex clients_mutex;
@@ -21,6 +21,9 @@ extern Camera camera;
 
 extern std::unordered_map<int, glm::vec3> playerPositions;
 extern std::mutex playerPositionsMutex;
+
+extern std::unordered_map<int, glm::vec3> planetPositions;
+extern std::mutex planetPositionsMutex;
 
 // add client to the list that stores their sockets and to the list that stores their UID
 void addClient(int client_fd, int clientUID) {
@@ -63,7 +66,6 @@ inline void handleClient(int client_fd, int uid=-1) {
     std::thread t1([=]() mutable {
         char buffer[8192];
         while (clientRunning) {
-            std::lock_guard<std::mutex> lock(recvMutex);
             int bytes = recv(client_fd, buffer, sizeof(buffer), 0);
             if (bytes > 0) {
                 std::string msg(buffer, bytes);
@@ -77,23 +79,32 @@ inline void handleClient(int client_fd, int uid=-1) {
                         tokens.push_back(item);
                 }
 
-                size_t firstSemicolon = msg.find(';');
-                if (firstSemicolon != std::string::npos) {
-                    int senderUID;
-                    try {
-                        senderUID = std::stoi(msg.substr(0, firstSemicolon));
-                    } catch(const std::invalid_argument& e) {
-                        std::cerr << "Error: std::stoi failed: invalid argument: " << e.what() << "\n";
-                    }
-                    std::string posPart = msg.substr(firstSemicolon + 1);
+                for (size_t i = 0; i < tokens.size();) {
+                    const std::string& token = tokens[i];
 
-                    float x, y, z;
-                    if (sscanf(posPart.c_str(), "%f;%f;%f;", &x, &y, &z) == 3) {
-                        std::lock_guard<std::mutex> lock(playerPositionsMutex);
-                        playerPositions[senderUID] = glm::vec3(x, y, z);
-                    } else {
-                        std::cerr << "Error: failed to parse player position (error code: PARSE_PLAYER_POSITION_FAILED, player position: " << posPart << ")\n";
-                        break;
+                    if (token == "UID" && i + 1 < tokens.size()) {
+                        uid = std::stoi(tokens[i + 1]);
+                        clientUIDs[uid] = uid;
+                        std::cout << "my UID is " << uid << " bruh\n";
+                        i += 2;
+                    } else if ((token == "SUN" || token == "EARTH" || token == "MOON") && i + 3 < tokens.size()) {
+                        int planetIndex = containsPlanetData(token + ";");
+                        std::cout << "Parsing planet position for " << token << " (planet index: " << planetIndex << ")\n";
+
+                        float x = std::stof(tokens[i + 1]);
+                        float y = std::stof(tokens[i + 2]);
+                        float z = std::stof(tokens[i + 3]);
+
+                        std::cout << "Setting position (" << x << ", " << y << ", " << z << ") for " << token << std::endl;
+
+                        std::lock_guard<std::mutex> lock(planetPositionsMutex);
+                        planetPositions[planetIndex] = glm::vec3(x, y, z);
+
+                        i += 4;
+                    }
+                    else {
+                        std::cerr << "Error: unknown argument: " << token << "\n";
+                        i++;
                     }
                 }
 
@@ -104,6 +115,7 @@ inline void handleClient(int client_fd, int uid=-1) {
                 removeClient(client_fd, clientUID);
             }
         }
+        std::cout << "YOOOO 1\n";
     });
 
     std::thread t2([&]{
