@@ -1,0 +1,31 @@
+{
+    "name": "Uranus",
+    "averageRadius": 25362000.0,
+    "equatorialRadius": 25559000.0,
+    "polarRadius": 24973000.0,
+    "gravitationalAcceleration": 8.69,
+    "x": 0.000,
+    "y": 0.000,
+    "z": 0.000,
+    "velocityX": 0.000,
+    "velocityY": 0.000,
+    "velocityZ": 0.000,
+    "axialTilt": 82.23,
+    "textures": {
+      "albedo": "",
+      "roughness": "",
+      "metallic": "",
+      "height": "",
+      "normal": ""
+    },
+    "textureSettings": {
+      "flipHorizontally": true,
+      "skipRM": true
+    },
+    "hasAtmosphere": true,
+    "atmosphereSettings": {
+      "breathable": false,
+      "height": 0.000
+    }
+  }
+  

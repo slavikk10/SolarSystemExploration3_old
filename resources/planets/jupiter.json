@@ -1,0 +1,31 @@
+{
+    "name": "Jupiter",
+    "averageRadius": 69911000.0,
+    "equatorialRadius": 71492000.0,
+    "polarRadius": 66854000.0,
+    "gravitationalAcceleration": 25.93,
+    "x": 0.000,
+    "y": 0.000,
+    "z": 0.000,
+    "velocityX": 0.000,
+    "velocityY": 0.000,
+    "velocityZ": 0.000,
+    "axialTilt": 3.13,
+    "textures": {
+      "albedo": "",
+      "roughness": "",
+      "metallic": "",
+      "height": "",
+      "normal": ""
+    },
+    "textureSettings": {
+      "flipHorizontally": true,
+      "skipRM": true
+    },
+    "hasAtmosphere": true,
+    "atmosphereSettings": {
+      "breathable": false,
+      "height": 0.000
+    }
+  }
+  

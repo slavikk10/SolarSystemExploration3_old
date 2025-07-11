@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="OpenGLTest"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/vyacheslav/OpenGL_C++_test_scene"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="rebuild_cache">
+				<Option working_dir="/Users/vyacheslav/OpenGL_C++_test_scene"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 rebuild_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="edit_cache">
+				<Option working_dir="/Users/vyacheslav/OpenGL_C++_test_scene"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 edit_cache"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="OpenGL_test_scene">
+				<Option output="/Users/vyacheslav/OpenGL_C++_test_scene/OpenGL_test_scene" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vyacheslav/OpenGL_C++_test_scene"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/vyacheslav/.brew/opt/glfw/include"/>
+					<Add directory="/Users/vyacheslav/.brew/opt/assimp/include"/>
+					<Add directory="/Users/vyacheslav/OpenGL_C++_test_scene/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk/System/Library/Frameworks/OpenGL.framework"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 OpenGL_test_scene"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="OpenGL_test_scene/fast">
+				<Option output="/Users/vyacheslav/OpenGL_C++_test_scene/OpenGL_test_scene" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vyacheslav/OpenGL_C++_test_scene"/>
+				<Option object_output="./"/>
+				<Option type="1"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add directory="/Users/vyacheslav/.brew/opt/glfw/include"/>
+					<Add directory="/Users/vyacheslav/.brew/opt/assimp/include"/>
+					<Add directory="/Users/vyacheslav/OpenGL_C++_test_scene/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.4.sdk/System/Library/Frameworks/OpenGL.framework"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 OpenGL_test_scene/fast"/>
+					<CompileFile command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/include/SrcXEngine/camera.h">
+			<Option target="OpenGL_test_scene"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/include/SrcXEngine/mesh.hpp">
+			<Option target="OpenGL_test_scene"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/include/SrcXEngine/model.hpp">
+			<Option target="OpenGL_test_scene"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/include/SrcXEngine/shader.h">
+			<Option target="OpenGL_test_scene"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/include/SrcXEngine/srcx.hpp">
+			<Option target="OpenGL_test_scene"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/include/filesystem.h">
+			<Option target="OpenGL_test_scene"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/src/glad.c">
+			<Option target="OpenGL_test_scene"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/stb_image.cpp">
+			<Option target="OpenGL_test_scene"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/test.cpp">
+			<Option target="OpenGL_test_scene"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

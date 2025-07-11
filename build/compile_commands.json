@@ -1,0 +1,20 @@
+[
+{
+  "directory": "/Users/vyacheslav/SSE3_OpenGL/build",
+  "command": "/usr/bin/clang++  -I/Users/vyacheslav/.brew/opt/glfw/include -I/Users/vyacheslav/.brew/opt/assimp/include -I/Users/vyacheslav/SSE3_OpenGL/include -iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -o CMakeFiles/sse3.dir/main.cpp.o -c /Users/vyacheslav/SSE3_OpenGL/main.cpp",
+  "file": "/Users/vyacheslav/SSE3_OpenGL/main.cpp",
+  "output": "CMakeFiles/sse3.dir/main.cpp.o"
+},
+{
+  "directory": "/Users/vyacheslav/SSE3_OpenGL/build",
+  "command": "/usr/bin/clang  -I/Users/vyacheslav/.brew/opt/glfw/include -I/Users/vyacheslav/.brew/opt/assimp/include -I/Users/vyacheslav/SSE3_OpenGL/include -iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -o CMakeFiles/sse3.dir/src/glad.c.o -c /Users/vyacheslav/SSE3_OpenGL/src/glad.c",
+  "file": "/Users/vyacheslav/SSE3_OpenGL/src/glad.c",
+  "output": "CMakeFiles/sse3.dir/src/glad.c.o"
+},
+{
+  "directory": "/Users/vyacheslav/SSE3_OpenGL/build",
+  "command": "/usr/bin/clang++  -I/Users/vyacheslav/.brew/opt/glfw/include -I/Users/vyacheslav/.brew/opt/assimp/include -I/Users/vyacheslav/SSE3_OpenGL/include -iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk/System/Library/Frameworks -g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -o CMakeFiles/sse3.dir/stb_image.cpp.o -c /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp",
+  "file": "/Users/vyacheslav/SSE3_OpenGL/stb_image.cpp",
+  "output": "CMakeFiles/sse3.dir/stb_image.cpp.o"
+}
+]

@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6"/>
+	<Project>
+		<Option title="GLFW"/>
+		<Option makefile_is_custom="1"/>
+		<Option compiler="gcc"/>
+		<Option virtualFolders="CMake Files\;CMake Files\cmake-build-debug\;CMake Files\cmake-build-debug\_deps\;CMake Files\cmake-build-debug\_deps\glfw-src\;CMake Files\cmake-build-debug\_deps\glfw-src\CMake\;CMake Files\cmake-build-debug\_deps\glfw-src\src\;CMake Files\cmake-build-debug\_deps\glfw-src\docs\;"/>
+		<Build>
+			<Target title="all">
+				<Option working_dir="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/Makefile&quot;  VERBOSE=1 all"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="uninstall">
+				<Option working_dir="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/Makefile&quot;  VERBOSE=1 uninstall"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="update_mappings">
+				<Option working_dir="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src"/>
+				<Option type="4"/>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src/Makefile&quot;  VERBOSE=1 update_mappings"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="glfw">
+				<Option output="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src/libglfw3.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D_GLFW_COCOA"/>
+					<Add directory="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/include"/>
+					<Add directory="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src"/>
+					<Add directory="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src/Makefile&quot;  VERBOSE=1 glfw"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+			<Target title="glfw/fast">
+				<Option output="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src/libglfw3.a" prefix_auto="0" extension_auto="0"/>
+				<Option working_dir="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src"/>
+				<Option object_output="./"/>
+				<Option type="2"/>
+				<Option compiler="gcc"/>
+				<Compiler>
+					<Add option="-D_GLFW_COCOA"/>
+					<Add directory="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/include"/>
+					<Add directory="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src"/>
+					<Add directory="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/16/include"/>
+					<Add directory="/Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/include"/>
+					<Add directory="/System/Library/Frameworks"/>
+					<Add directory="/Library/Frameworks"/>
+				</Compiler>
+				<MakeCommands>
+					<Build command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src/Makefile&quot;  VERBOSE=1 glfw/fast"/>
+					<CompileFile command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src/Makefile&quot;  VERBOSE=1 &quot;$file&quot;"/>
+					<Clean command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src/Makefile&quot;  VERBOSE=1 clean"/>
+					<DistClean command="/usr/bin/make -j8 -f &quot;/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-build/src/Makefile&quot;  VERBOSE=1 clean"/>
+				</MakeCommands>
+			</Target>
+		</Build>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/CMake/GenerateMappings.cmake">
+			<Option target="update_mappings"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/include/GLFW/glfw3.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/include/GLFW/glfw3native.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/cocoa_init.m">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/cocoa_joystick.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/cocoa_joystick.m">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/cocoa_monitor.m">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/cocoa_platform.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/cocoa_time.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/cocoa_time.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/cocoa_window.m">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/context.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/egl_context.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/init.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/input.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/internal.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/mappings.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/mappings.h.in">
+			<Option target="update_mappings"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/monitor.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/nsgl_context.m">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/null_init.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/null_joystick.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/null_joystick.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/null_monitor.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/null_platform.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/null_window.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/osmesa_context.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/platform.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/platform.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/posix_module.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/posix_thread.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/posix_thread.h">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/vulkan.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/window.c">
+			<Option target="glfw"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\cmake-build-debug\_deps\glfw-src\"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/CMake/cmake_uninstall.cmake.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\_deps\glfw-src\CMake\"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/CMake/glfw3.pc.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\_deps\glfw-src\CMake\"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/CMake/glfw3Config.cmake.in">
+			<Option virtualFolder="CMake Files\cmake-build-debug\_deps\glfw-src\CMake\"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/src/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\cmake-build-debug\_deps\glfw-src\src\"/>
+		</Unit>
+		<Unit filename="/Users/vyacheslav/OpenGL_C++_test_scene/cmake-build-debug/_deps/glfw-src/docs/CMakeLists.txt">
+			<Option virtualFolder="CMake Files\cmake-build-debug\_deps\glfw-src\docs\"/>
+		</Unit>
+	</Project>
+</CodeBlocks_project_file>

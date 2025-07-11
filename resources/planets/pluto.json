@@ -1,0 +1,31 @@
+{
+    "name": "Pluto",
+    "averageRadius": 1188300.0,
+    "equatorialRadius": 1188300.0,
+    "polarRadius": 1188300.0,
+    "gravitationalAcceleration": 0.620,
+    "x": 0.000,
+    "y": 0.000,
+    "z": 0.000,
+    "velocityX": 0.000,
+    "velocityY": 0.000,
+    "velocityZ": 0.000,
+    "axialTilt": 122.53,
+    "textures": {
+      "albedo": "",
+      "roughness": "",
+      "metallic": "",
+      "height": "",
+      "normal": ""
+    },
+    "textureSettings": {
+      "flipHorizontally": true,
+      "skipRM": true
+    },
+    "hasAtmosphere": true,
+    "atmosphereSettings": {
+      "breathable": false,
+      "height": 0.000
+    }
+  }
+  

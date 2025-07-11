@@ -1,0 +1,31 @@
+{
+    "name": "Mars",
+    "averageRadius": 3389500.0,
+    "equatorialRadius": 3396190.0,
+    "polarRadius": 3376200.0,
+    "gravitationalAcceleration": 3.728,
+    "x": 0.000,
+    "y": 0.000,
+    "z": 0.000,
+    "velocityX": 0.000,
+    "velocityY": 0.000,
+    "velocityZ": 0.000,
+    "axialTilt": 25.19,
+    "textures": {
+      "albedo": "",
+      "roughness": "",
+      "metallic": "",
+      "height": "",
+      "normal": ""
+    },
+    "textureSettings": {
+      "flipHorizontally": true,
+      "skipRM": true
+    },
+    "hasAtmosphere": true,
+    "atmosphereSettings": {
+      "breathable": false,
+      "height": 0.000
+    }
+  }
+  

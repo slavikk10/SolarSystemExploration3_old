@@ -1,0 +1,31 @@
+{
+    "name": "Europa",
+    "averageRadius": 1561000.0,
+    "equatorialRadius": 1561000.0,
+    "polarRadius": 1561000.0,
+    "gravitationalAcceleration": 1.314,
+    "x": 0.000,
+    "y": 0.000,
+    "z": 0.000,
+    "velocityX": 0.000,
+    "velocityY": 0.000,
+    "velocityZ": 0.000,
+    "axialTilt": 0.10,
+    "textures": {
+      "albedo": "",
+      "roughness": "",
+      "metallic": "",
+      "height": "",
+      "normal": ""
+    },
+    "textureSettings": {
+      "flipHorizontally": true,
+      "skipRM": true
+    },
+    "hasAtmosphere": false,
+    "atmosphereSettings": {
+      "breathable": false,
+      "height": 0.000
+    }
+  }
+  

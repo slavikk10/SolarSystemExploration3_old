@@ -1,0 +1,31 @@
+{
+    "name": "Callisto",
+    "averageRadius": 2410500.0,
+    "equatorialRadius": 2410500.0,
+    "polarRadius": 2410500.0,
+    "gravitationalAcceleration": 1.235,
+    "x": 0.000,
+    "y": 0.000,
+    "z": 0.000,
+    "velocityX": 0.000,
+    "velocityY": 0.000,
+    "velocityZ": 0.000,
+    "axialTilt": 0.00,
+    "textures": {
+      "albedo": "",
+      "roughness": "",
+      "metallic": "",
+      "height": "",
+      "normal": ""
+    },
+    "textureSettings": {
+      "flipHorizontally": true,
+      "skipRM": true
+    },
+    "hasAtmosphere": false,
+    "atmosphereSettings": {
+      "breathable": false,
+      "height": 0.000
+    }
+  }
+  
