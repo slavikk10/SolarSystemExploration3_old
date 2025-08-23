@@ -5,15 +5,16 @@
     "polarRadius": 1736000.0,
     "gravitationalAcceleration": 1.62,
 
-    "x": 4.554264437870046E+07,
-    "y": -9.824045699685812E+02,
-    "z": -1.461045291504693E+08,
+    "x": 1.321739891072657E+08,
+    "y": 2.318814651546255E+04,
+    "z": -7.243056717825179E+07,
 
-    "velocityX": 2.889013299101454E+01,
-    "velocityY": 9.091279156494144E+00,
-    "velocityZ": 2.875594629304423E-02,
+    "velocityX": 1.347230265701632E+01,
+    "velocityY": -9.255878435564213E-02,
+    "velocityZ": 2.514700497588300E+01,
 
     "axialTilt": 1.5424,
+    "rotationSpeed": 0.0001525,
 
     "textures": {
         "albedo": "resources/textures/planets/moon/moon_surface.jpg",

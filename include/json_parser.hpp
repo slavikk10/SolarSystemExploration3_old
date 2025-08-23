@@ -43,13 +43,17 @@ CelestialBody parsePlanetJSON(const char* path) {
     std::string vel_x;
     std::string vel_y;
     std::string vel_z;
+    std::string s_axial_tilt;
+    std::string s_rotation_speed;
 
     float g_accel;
     float avg_radius;
     float eq_radius;
     float polar_radius;
+    float axial_tilt;
+    float rotation_speed;
 
-    unsigned int err = 11;
+    unsigned int err = 13;
     while (std::getline(jsonStream, line)) {
         size_t name_pos = line.find("name");
         if (name_pos != std::string::npos) {
@@ -215,18 +219,50 @@ CelestialBody parsePlanetJSON(const char* path) {
             vel_z = line.substr(start, lastComma - start);
             velocity.z = std::stof(vel_z);
         }
+
+        // axial tilt (float, used for rotating the planet)
+        size_t s_axial_tilt_pos = line.find("axialTilt");
+        if (s_axial_tilt_pos != std::string::npos) {
+            err -= 1;
+
+            size_t start;
+            if (line[s_axial_tilt_pos+11] == ' ')
+                start = s_axial_tilt_pos+12;
+            else
+                start = s_axial_tilt_pos+11;
+
+            size_t lastComma = line.find(',', start + 1);
+            s_axial_tilt = line.substr(start, lastComma - start);
+        }
+
+        // rotation speed (float, used to rotate the planet around it's axis)
+        size_t s_rotation_speed_pos = line.find("rotationSpeed");
+        if (s_rotation_speed_pos != std::string::npos) {
+            err -= 1;
+
+            size_t start;
+            if (line[s_rotation_speed_pos+15] == ' ')
+                start = s_rotation_speed_pos+16;
+            else
+                start = s_rotation_speed_pos+15;
+
+            size_t lastComma = line.find(',', start + 1);
+            s_rotation_speed = line.substr(start, lastComma - start);
+        }
     }
 
     if (err != 0) {
         std::cout << "Error: JSON file error at path: " << getFilePath(path) << std::endl;
     }
 
-    g_accel      = std::stof(s_g_accel);
-    avg_radius   = std::stof(s_avg_radius);
-    eq_radius    = std::stof(s_eq_radius);
-    polar_radius = std::stof(s_polar_radius);
+    g_accel        = std::stof(s_g_accel);
+    avg_radius     = std::stof(s_avg_radius);
+    eq_radius      = std::stof(s_eq_radius);
+    polar_radius   = std::stof(s_polar_radius);
+    axial_tilt     = std::stof(s_axial_tilt);
+    rotation_speed = std::stof(s_rotation_speed);
 
-    CelestialBody body(position, velocity, avg_radius, eq_radius, polar_radius, g_accel);
+    CelestialBody body(position, velocity, avg_radius, eq_radius, polar_radius, g_accel, axial_tilt, rotation_speed);
 
     return body;
 }

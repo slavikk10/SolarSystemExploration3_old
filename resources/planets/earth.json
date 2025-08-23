@@ -5,15 +5,16 @@
     "polarRadius": 6356752.0,
     "gravitationalAcceleration": 9.81,
 
-    "x": 4.549120456127180E+07,
-    "y": 3.206653199144453E+04,
-    "z": -1.457154724786783E+08,
+    "x": 1.325642404204230E+08,
+    "y": 2.593482662561163E+04,
+    "z": -7.248338623823936E+07,
 
-    "velocityX": 2.790217173115922E+01,
-    "velocityY": 8.921574781652449E+00,
-    "velocityZ": -1.279187493850475E-03,
+    "velocityX": 1.364897762669466E+01,
+    "velocityY": -7.501512110188457E-04,
+    "velocityZ": 2.612917605635382E+01,
 
     "axialTilt": 23.44,
+    "rotationSpeed": 0.0041667,
 
     "textures": {
         "albedo": "resources/textures/planets/earth/earth_surface.jpg",

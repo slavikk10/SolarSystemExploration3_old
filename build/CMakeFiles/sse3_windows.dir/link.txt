@@ -1,0 +1,1 @@
+/usr/bin/clang++ -g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/sse3_windows.dir/main.cpp.o CMakeFiles/sse3_windows.dir/src/glad.c.o CMakeFiles/sse3_windows.dir/stb_image.cpp.o -o sse3_windows

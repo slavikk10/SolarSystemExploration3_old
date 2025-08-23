@@ -38,11 +38,11 @@
 
 std::vector<int> clientUIDs(1000000);
 
-std::unordered_map<int, glm::vec3> playerPositions;
+std::unordered_map<int, glm::dvec3> playerPositions;
 std::mutex playerPositionsMutex;
 
-std::unordered_map<int, glm::vec3> planetPositions;
-std::mutex planetPositionsMutex;
+std::vector<glm::dvec3> planetPositions(10);
+std::vector<glm::dvec3> planetVelocities(10);
 
 void framebuffer_size_callback(GLFWwindow* window, int width, int height);
 void mouse_callback(GLFWwindow* window, double xpos, double ypos);
@@ -74,12 +74,16 @@ bool firstMouse = true;
 
 // timing
 float deltaTime = 0.0f;
-float lastFrame = 0.0f;
+float lastFrame = glfwGetTime();
 
 // constants
 const float sscale = 1.0f; // scale of the Solar System (1:1)
 
 bool isServer;
+int timestamp;
+
+float pitch, yaw, roll;
+glm::vec3 ndv;
 
 int main(int argc, char* argv[]) {
     // check if server or client
@@ -768,17 +772,17 @@ int main(int argc, char* argv[]) {
 
     float end = glfwGetTime();
 
-    std::vector<CelestialBody> bodies;
+    std::vector<CelestialBody> bodies(3);
     if (isServer) {
         bodies = {
-            CelestialBody(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.0, 0.0), 695700000, 695508000, 695800000, 274.049), // Sun
-            //CelestialBody(glm::vec3(-3.010549851451788E+07, -6.359103389001439E+07, -2.405822593778040E+06), glm::vec3(3.430790710871147E+01, -1.832212359355950E+01, -4.642893227687938E+00), 2439700.00, 2440500.0, 2438500.0, 3.700), // Mercury
-            //CelestialBody(glm::vec3( 9.524255103572875e+10, -6.213717611494824e+09, -5.199647206619611e+10), glm::vec3( 1.629745416122789e+4, -5.174244527849687e-4,  3.074604261038377e+4), 6051800.00, 8.870), // Venus
+            CelestialBody(glm::vec3(0.0, 0.0, 0.0), glm::vec3(0.0, 0.0, 0.0), 695700000, 695508000, 695800000, 274.049, 0.0, 0.0), // Sun
+            parsePlanetJSON("resources/planets/mercury.json"),
+            parsePlanetJSON("resources/planets/venus.json"),
             parsePlanetJSON("resources/planets/earth.json"),
             parsePlanetJSON("resources/planets/moon.json"),
-            //CelestialBody(glm::vec3(4.554264437870046E+07, -1.461045291504693E+08, -9.824045699685812E+02), glm::vec3(2.889013299101454E+01,  9.091279156494144E+00,  2.875594629304423E-02), 1737400.00, 1738100.0, 1736000.0, 1.620), // Earth/Moon
-            /*CelestialBody(glm::vec3(-2.447261099970919e+11,  5.416688334250521e+09, -2.904527272051912e+10), glm::vec3( 3.702006156517989e+3, -5.516948900142156e-4, -2.200086665127839e+4), 3389500.00, 3.730), // Mars
-            CelestialBody(glm::vec3(-4.155962876379675e+10, -2.252909919162691e+09,  7.674747027447987e+11), glm::vec3(-1.319807488636713e+4, -5.516948900142156e-4, -8.347507826614081e-5), 71492000.0, 24.79), // Jupiter
+            parsePlanetJSON("resources/planets/mars.json"),
+            CelestialBody(glm::vec3(1.325642404204230E+08, 2.593482662561163E+04, -7.248338623823936E+07+6378.137+1000.0), glm::vec3(1.364897762669466E+01+8, -7.501512110188457E-04, 2.612917605635382E+01), 1.81, 1.81, 1.81, 0.0000000014, 0.0, 0.0), // Player
+            /*CelestialBody(glm::vec3(-4.155962876379675e+10, -2.252909919162691e+09,  7.674747027447987e+11), glm::vec3(-1.319807488636713e+4, -5.516948900142156e-4, -8.347507826614081e-5), 71492000.0, 24.79), // Jupiter
             CelestialBody(glm::vec3( 1.426000189864588e+12, -5.468390271451207e+10, -1.203550185774606e+11), glm::vec3( 2.775345470427069e-4, -1.774901403126501e-4,  9.603681056096420e+3), 58232000.0, 10.44), // Saturn
             CelestialBody(glm::vec3( 1.573711616842715e+12, -1.125450741055036e+10,  2.459155382854037e+12), glm::vec3(-5.786230412012094e+3,  8.734538058380403e-6,  3.353286525767898e+3), 25362000.0, 8.690), // Uranus
             CelestialBody(glm::vec3( 4.469572046319349e+12, -1.027391845496875e+11, -1.294629107594498e+10), glm::vec3(-1.931667661979989e-6, -1.123826516130224e-4,  5.467910945075801e+3), 24622000.0, 11.15), // Neptune
@@ -796,10 +800,17 @@ int main(int argc, char* argv[]) {
         };
     }
 
-    std::vector<glm::vec4> bodyData = {
-        glm::vec4(695700000.0, 695508000, 695800000, 274.049),
-        glm::vec4(6371000.0, 6378137.0, 6356752.0, 9.81),
-        glm::vec4(1737400.00, 1738100.0, 1736000.0, 1.620)
+    std::vector<glm::dvec4> bodyData = {
+        glm::dvec4(695700000.0, 695508000, 695800000, 274.049),
+        glm::dvec4(6371000.0, 6378137.0, 6356752.0, 9.81),
+        glm::dvec4(1737400.00, 1738100.0, 1736000.0, 1.620),
+        glm::dvec4(0.0, 0.0, 0.0, 0.0),
+        glm::dvec4(0.0, 0.0, 0.0, 0.0),
+        glm::dvec4(0.0, 0.0, 0.0, 0.0),
+        glm::dvec4(0.0, 0.0, 0.0, 0.0),
+        glm::dvec4(0.0, 0.0, 0.0, 0.0),
+        glm::dvec4(0.0, 0.0, 0.0, 0.0),
+        glm::dvec4(0.0, 0.0, 0.0, 0.0)
     };
 
     std::thread([&]() {
@@ -821,14 +832,18 @@ int main(int argc, char* argv[]) {
 
                 std::cout << "Player " << uid << " joined.\n";
 
-                // send planet positions
-                packet = "SUN;" + std::to_string(bodies[0].position.x) + ";" + std::to_string(bodies[0].position.y) + ";" + std::to_string(bodies[0].position.z) + ";";
+                // send current server timestamp
+                packet = "TIMESTAMP;" + std::to_string(timestamp) + ";";
                 send(accept_client_fd, packet.c_str(), packet.length(), 0);
 
-                packet = "EARTH;" + std::to_string(bodies[1].position.x) + ";" + std::to_string(bodies[1].position.y) + ";" + std::to_string(bodies[1].position.z) + ";";
+                // send planet positions and velocities
+                packet = "SUN;" + std::to_string(bodies[0].position.x) + ";" + std::to_string(bodies[0].position.y) + ";" + std::to_string(bodies[0].position.z) + ";" + std::to_string(bodies[0].velocity.x) + ";" + std::to_string(bodies[0].velocity.y) + ";" + std::to_string(bodies[0].velocity.z) + ";";
                 send(accept_client_fd, packet.c_str(), packet.length(), 0);
 
-                packet = "MOON;" + std::to_string(bodies[2].position.x) + ";" + std::to_string(bodies[2].position.y) + ";" + std::to_string(bodies[2].position.z) + ";";
+                packet = "EARTH;" + std::to_string(bodies[1].position.x) + ";" + std::to_string(bodies[1].position.y) + ";" + std::to_string(bodies[1].position.z) + ";" + std::to_string(bodies[1].velocity.x) + ";" + std::to_string(bodies[1].velocity.y) + ";" + std::to_string(bodies[1].velocity.z) + ";";
+                send(accept_client_fd, packet.c_str(), packet.length(), 0);
+
+                packet = "MOON;" + std::to_string(bodies[2].position.x) + ";" + std::to_string(bodies[2].position.y) + ";" + std::to_string(bodies[2].position.z) + ";" + std::to_string(bodies[2].velocity.x) + ";" + std::to_string(bodies[2].velocity.y) + ";" + std::to_string(bodies[2].velocity.z) + ";";
                 send(accept_client_fd, packet.c_str(), packet.length(), 0);
 
                 if (accept_client_fd >= 0)
@@ -839,53 +854,65 @@ int main(int argc, char* argv[]) {
 
     int uid;
     std::thread([&]() {
-        if (!isServer)
+        if (!isServer) {
             handleClient(client_fd, uid);
+        }
     }).detach();
 
     if (!isServer) {
-        while (planetPositions.size() != 3) {
-            std::cout << "Waiting... (current size: " << planetPositions.size() << ")\n";
-            std::this_thread::sleep_for(std::chrono::milliseconds(1000));
+        while (planetPositions[3] == glm::dvec3(0.0f)) {
+            std::cout << "Waiting...\n";
+            std::this_thread::sleep_for(std::chrono::milliseconds(100));
         }
 
-        for (unsigned int i = 0; i < planetPositions.size(); i++) {
+        for (unsigned int i = 0; i < 3; i++) {
             bodies[i].position            = planetPositions[i];
             bodies[i].averageRadius       = bodyData[i].x;
             bodies[i].equatorialRadius    = bodyData[i].y;
             bodies[i].polarRadius         = bodyData[i].z;
             bodies[i].gravityAcceleration = bodyData[i].w;
         }
-
-        std::cout << "Set bodies to size of " << bodies.size() << " (planetPositions size: " << planetPositions.size() << ").\n";
     }
 
     // render loop
     // -----------
     while (!glfwWindowShouldClose(window))
     {
+        timestamp += 1;
+
         // per-frame time logic
         // --------------------
         float currentFrame = static_cast<float>(glfwGetTime());
-        if (lastFrame == 0)
-            deltaTime = currentFrame - (end - start);
-        else
-            deltaTime = currentFrame - lastFrame;
+        deltaTime = currentFrame - lastFrame;
+        if (timestamp == 1 && deltaTime > 0.1f)
+            deltaTime = 0.1f;            
         lastFrame = currentFrame;
 
-        std::cout << "FPS: " << 1.0f / deltaTime << std::endl;
-
-
-        for (auto &body : bodies) {
-            body.updateVelocity(bodies, deltaTime);
-        }
+        //std::cout << "FPS: " << 1.0f / deltaTime << std::endl;
 
         for (auto &body : bodies) {
-            body.updatePosition(deltaTime);
+            body.updateVelocity(bodies, deltaTime*100);
         }
 
-        camera.Position = glm::vec3(bodies[2].position.x/sscale, bodies[2].position.y/sscale+6378237.0, bodies[2].position.z/sscale);
-        //camera.Position = glm::vec3(bodies[14].position.x/sscale, bodies[14].position.y/sscale, bodies[14].position.z/sscale);
+        // calculate NDV
+        ndv.x = -camera.GetViewMatrix()[2][0];
+        ndv.y = -camera.GetViewMatrix()[2][1];
+        ndv.z = -camera.GetViewMatrix()[2][2];
+
+        ndv = glm::normalize(ndv);
+
+        // calculate thrust acceleration of the rocket and calculate total acceleration
+        glm::vec3 thrustAccel = 100000.0f * ndv;
+        glm::vec3 totalAccel = bodies[6].totalAcceleration + thrustAccel;
+
+        //bodies[6].velocity += totalAccel * (deltaTime);
+
+        for (auto &body : bodies) {
+            body.updatePosition(deltaTime*100);
+        }
+
+        //camera.Position = glm::dvec3(bodies[3].position.x/sscale, bodies[3].position.y/sscale+6388137.0, bodies[3].position.z/sscale);
+        camera.Position = glm::vec3(bodies[6].position.x/sscale, bodies[6].position.y/sscale, bodies[6].position.z/sscale);
 
         // input
         // -----
@@ -972,8 +999,6 @@ int main(int argc, char* argv[]) {
 
             lightShader.use();
 
-            std::cout << "TEST 11\n";
-
             // -----------------------------------------------------------------------------------------------------------------------------
             // Sun
             glm::dmat4 model = glm::dmat4(1.0f);
@@ -986,28 +1011,31 @@ int main(int argc, char* argv[]) {
             renderSphere(false);
             // -----------------------------------------------------------------------------------------------------------------------------
 
-            std::cout << "TEST 12\n";
-
             shaderTex.use();
 
             // -----------------------------------------------------------------------------------------------------------------------------
             // Earth
-            static double rotationAngle = 0.0;
-            rotationAngle += glm::radians(0.0041667) * (deltaTime * 100);
-
+            float rotationSpeed = glm::radians(bodies[3].rotationSpeed);
             model = glm::dmat4(1.0f);
-            model = glm::translate(model, glm::dvec3(bodies[1].position.x/sscale - camera.Position.x, bodies[1].position.y/sscale - camera.Position.y, bodies[1].position.z/sscale - camera.Position.z));
-            model = glm::scale(model, glm::dvec3(bodies[1].averageRadius/sscale));
-            //model = glm::rotate(model, glm::radians(23.44), glm::dvec3(1.0, 0.0, 0.0)); // axial tilt
-            model = glm::rotate(model, rotationAngle,       glm::dvec3(0.0, 1.0, 0.0)); // rotation around axis
+            model = glm::translate(model, glm::dvec3(bodies[3].position.x/sscale - camera.Position.x, bodies[3].position.y/sscale - camera.Position.y, bodies[3].position.z/sscale - camera.Position.z));
+            model = glm::scale(model, glm::dvec3(bodies[3].equatorialRadius/sscale, bodies[3].polarRadius/sscale, bodies[3].equatorialRadius/sscale));
+            model = glm::rotate(model, (double)glm::radians(bodies[3].axialTilt),     glm::dvec3(0.0, 0.0, 1.0)); // axial tilt
+            model = glm::rotate(model, (double)rotationSpeed*timestamp*deltaTime,                         glm::dvec3(0.0, 1.0, 0.0)); // rotation around axis
+
+            std::cout << rotationSpeed*timestamp << std::endl;
+            std::cout << "timestamp " << timestamp << std::endl;
+            std::cout << "dt " << deltaTime << std::endl;
+            std::cout << "-----------------------------------------\n";
 
             shaderTex.setBool("flipHor", true);
             shaderTex.setBool("skipRM", false);
             shaderTex.setMat4("model", model);
 
-            //glm::mat3 rotationMatrix = glm::mat3(glm::vec3(glm::cos(rotationAngle), 0.0f, glm::sin(rotationAngle)), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(-glm::sin(rotationAngle), 0.0f, glm::cos(rotationAngle)));
-            glm::mat3 rotationMatrix = glm::mat3(glm::vec3(glm::cos(rotationAngle), 0.0f, glm::sin(rotationAngle)), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(-glm::sin(rotationAngle), 0.0f, glm::cos(rotationAngle))); // rotation matrix with axial tilt
-
+            glm::mat3 rotationMatrixY = glm::mat3(glm::vec3(glm::cos(rotationSpeed*timestamp*deltaTime), 0.0f, glm::sin(rotationSpeed*timestamp*deltaTime)), glm::vec3(0.0f, 1.0f, 0.0f), glm::vec3(-glm::sin(rotationSpeed*timestamp*deltaTime), 0.0f, glm::cos(rotationSpeed*timestamp*deltaTime)));         // rotation matrix for Y axis
+            glm::mat3 rotationMatrixX = glm::mat3(glm::vec3(1.0f, 0.0f, 0.0f), glm::vec3(0.0f, glm::cos(90.0f+bodies[3].axialTilt), -glm::sin(90.0f+bodies[3].axialTilt)), glm::vec3(0.0f, glm::sin(90.0f+bodies[3].axialTilt), glm::cos(90.0f+bodies[3].axialTilt))); // rotation matrix for X axis
+            glm::mat3 rotationMatrixZ = glm::mat3(glm::vec3(glm::cos(90.0f+bodies[3].axialTilt), -glm::sin(90.0f+bodies[3].axialTilt), 0.0f), glm::vec3(glm::sin(90.0f+bodies[3].axialTilt), glm::cos(90.0f+bodies[3].axialTilt), 0.0f), glm::vec3(0.0f, 0.0f, 1.0f)); // rotation matrix for Z axis
+            glm::mat3 rotationMatrix = rotationMatrixY * rotationMatrixZ;
+            
             shaderTex.setMat3("rotationMatrix", rotationMatrix);
 
             renderSphere(true);
@@ -1020,12 +1048,13 @@ int main(int argc, char* argv[]) {
             // Mercury
             model = glm::dmat4(1.0f);
             model = glm::translate(model, glm::dvec3(bodies[1].position.x/sscale - camera.Position.x, bodies[1].position.y/sscale - camera.Position.y, bodies[1].position.z/sscale - camera.Position.z));
-            //model = glm::scale(model, glm::dvec3(bodies[1].radius/sscale));
+            model = glm::scale(model, glm::dvec3(bodies[1].equatorialRadius/sscale, bodies[1].polarRadius/sscale, bodies[1].equatorialRadius/sscale));
 
             shaderTex.setBool("skipRM", true);
             shaderTex.setMat4("model", model);
             shaderTex.setMat3("rotationMatrix", glm::mat3(1.0f));
-            //renderSphere(true);
+        
+            renderSphere(true);
             // -----------------------------------------------------------------------------------------------------------------------------
 
             glActiveTexture(GL_TEXTURE0);
@@ -1035,7 +1064,7 @@ int main(int argc, char* argv[]) {
             // Venus
             model = glm::dmat4(1.0f);
             model = glm::translate(model, glm::dvec3(bodies[2].position.x/sscale - camera.Position.x, bodies[2].position.y/sscale - camera.Position.y, bodies[2].position.z/sscale - camera.Position.z));
-            //model = glm::scale(model, glm::dvec3(bodies[2].radius/sscale));
+            model = glm::scale(model, glm::dvec3(bodies[2].equatorialRadius/sscale, bodies[2].polarRadius/sscale, bodies[2].equatorialRadius/sscale));
 
             shaderTex.setMat4("model", model);
             renderSphere(true);
@@ -1051,8 +1080,8 @@ int main(int argc, char* argv[]) {
             // -----------------------------------------------------------------------------------------------------------------------------
             // Moon
             model = glm::dmat4(1.0f);
-            model = glm::translate(model, glm::dvec3(bodies[2].position.x/sscale - camera.Position.x, bodies[2].position.z/sscale - camera.Position.z, bodies[2].position.y/sscale - camera.Position.y));
-            model = glm::scale(model, glm::dvec3(bodies[2].averageRadius/sscale));
+            model = glm::translate(model, glm::dvec3(bodies[4].position.x/sscale - camera.Position.x, bodies[4].position.y/sscale - camera.Position.y, bodies[4].position.z/sscale - camera.Position.z));
+            model = glm::scale(model, glm::dvec3(bodies[4].equatorialRadius/sscale, bodies[4].polarRadius/sscale, bodies[4].equatorialRadius/sscale));
 
             shaderTex.setMat4("model", model);
             renderSphere(true);
@@ -1063,13 +1092,15 @@ int main(int argc, char* argv[]) {
 
             // -----------------------------------------------------------------------------------------------------------------------------
             // Mars
+            rotationSpeed = glm::radians(bodies[5].rotationSpeed);
             model = glm::dmat4(1.0f);
             model = glm::translate(model, glm::dvec3(bodies[5].position.x/sscale - camera.Position.x, bodies[5].position.y/sscale - camera.Position.y, bodies[5].position.z/sscale - camera.Position.z));
-            
-            //model = glm::scale(model, glm::dvec3(bodies[5].radius/sscale));
+            model = glm::scale(model, glm::dvec3(bodies[5].equatorialRadius/sscale, bodies[5].polarRadius/sscale, bodies[5].equatorialRadius/sscale));
+            model = glm::rotate(model, (double)glm::radians(bodies[5].axialTilt), glm::dvec3(1.0, 0.0, 0.0)); // axial tilt
+            model = glm::rotate(model, 0.0,       glm::dvec3(0.0, 1.0, 0.0)); // rotation around axis
 
             shaderTex.setMat4("model", model);
-            //renderSphere(true);
+            renderSphere(true);
             // -----------------------------------------------------------------------------------------------------------------------------
 
             glActiveTexture(GL_TEXTURE0);
@@ -1219,17 +1250,17 @@ int main(int argc, char* argv[]) {
             // disable writing to depth buffer
             glDepthMask(GL_FALSE);
 
-            atmosphereShader.setVec3("planetWorldPos", glm::vec3(bodies[1].position.x/sscale - camera.Position.x, bodies[1].position.y/sscale - camera.Position.y, bodies[1].position.z/sscale - camera.Position.z));
-            atmosphereShader.setFloat("planetRadius", bodies[1].averageRadius/sscale);
+            atmosphereShader.setVec3("planetWorldPos", glm::vec3(bodies[3].position.x/sscale - camera.Position.x, bodies[3].position.y/sscale - camera.Position.y, bodies[3].position.z/sscale - camera.Position.z));
+            atmosphereShader.setFloat("planetRadius", bodies[3].averageRadius/sscale);
             atmosphereShader.setVec3("wavelengths", glm::vec3(650.0f, 570.0f, 475.0f));
             atmosphereShader.setFloat("atmosphereHeight", 100000.0f);
 
             // -----------------------------------------------------------------------------------------------------------------------------
             // Earth's atmosphere
             model = glm::dmat4(1.0f);
-            model = glm::translate(model, glm::dvec3(bodies[1].position.x/sscale - camera.Position.x, bodies[1].position.y/sscale - camera.Position.y, bodies[1].position.z/sscale - camera.Position.z));
+            model = glm::translate(model, glm::dvec3(bodies[3].position.x/sscale - camera.Position.x, bodies[3].position.y/sscale - camera.Position.y, bodies[3].position.z/sscale - camera.Position.z));
             
-            model = glm::scale(model, glm::dvec3(bodies[1].averageRadius/sscale+1000000.0f));
+            model = glm::scale(model, glm::dvec3(bodies[3].averageRadius/sscale+100000.0f));
 
             atmosphereShader.setMat4("model", model);
             renderSphere(false);
@@ -1255,13 +1286,15 @@ int main(int argc, char* argv[]) {
 
             // render players
             // --------------
-            std::cout << "Total players: " << playerPositions.size() << std::endl;
+            //std::cout << "Total players: " << playerPositions.size() << std::endl;
             lightShader.use();
             for (const auto& [clientUID, pos] : playerPositions) {
                 if (clientUID == uid) continue;
-                std::cout << "Player " << clientUID << " position: " << pos.x << ", " << pos.y << ", " << pos.z << std::endl;
+                std::cout << "Player " << clientUID << " position: " << pos.x << ", " << pos.y << ", " << pos.z << " at my timestamp " << timestamp << std::endl;
+                glm::dvec3 posDiff = pos - glm::dvec3(camera.Position);
+                std::cout << "Position difference: " << posDiff.x << ", " << posDiff.y << ", " << posDiff.z << std::endl;
                 model = glm::dmat4(1.0);
-                model = glm::translate(model, glm::dvec3(pos - camera.Position));
+                model = glm::translate(model, glm::dvec3(pos - glm::dvec3(camera.Position)));
                 model = glm::scale(model, glm::dvec3(1.81));
                 lightShader.setMat4("model", model);
                 renderSphere(false);

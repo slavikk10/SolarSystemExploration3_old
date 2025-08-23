@@ -4,7 +4,7 @@ in vec3 WorldPos;
 in vec4 vClipPos;
 
 const float densityFalloff = 10.0;
-const float scatteringStrength = 0.01;
+const float scatteringStrength = 0.1;
 
 uniform vec3 camPos;
 uniform vec3 lightPos;
@@ -18,9 +18,9 @@ uniform vec3 wavelengths;
 
 float atmosphereRadius = planetRadius + atmosphereHeight;
 
-float scatterR = pow(400 / wavelengths.x, 4) * scatteringStrength;
-float scatterG = pow(400 / wavelengths.y, 4) * scatteringStrength;
-float scatterB = pow(400 / wavelengths.z, 4) * scatteringStrength;
+float scatterR = pow(60 / wavelengths.x, 4) * scatteringStrength;
+float scatterG = pow(60 / wavelengths.y, 4) * scatteringStrength;
+float scatterB = pow(60 / wavelengths.z, 4) * scatteringStrength;
 vec3 scatteringCoefficients = vec3(scatterR, scatterG, scatterB);
 
 const int NUM_SAMPLES = 10;

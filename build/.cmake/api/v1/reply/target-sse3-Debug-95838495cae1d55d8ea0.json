@@ -12,6 +12,7 @@
 		[
 			"add_executable",
 			"target_link_libraries",
+			"add_compile_options",
 			"include_directories"
 		],
 		"files" : 
@@ -26,43 +27,55 @@
 			{
 				"command" : 0,
 				"file" : 0,
-				"line" : 12,
-				"parent" : 0
-			},
-			{
-				"command" : 1,
-				"file" : 0,
-				"line" : 18,
-				"parent" : 0
-			},
-			{
-				"command" : 1,
-				"file" : 0,
-				"line" : 19,
-				"parent" : 0
-			},
-			{
-				"command" : 2,
-				"file" : 0,
-				"line" : 14,
-				"parent" : 0
-			},
-			{
-				"command" : 2,
-				"file" : 0,
-				"line" : 15,
-				"parent" : 0
-			},
-			{
-				"command" : 2,
-				"file" : 0,
 				"line" : 16,
 				"parent" : 0
 			},
 			{
 				"command" : 1,
 				"file" : 0,
-				"line" : 21,
+				"line" : 22,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 23,
+				"parent" : 0
+			},
+			{
+				"command" : 2,
+				"file" : 0,
+				"line" : 8,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 18,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 19,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 20,
+				"parent" : 0
+			},
+			{
+				"command" : 3,
+				"file" : 0,
+				"line" : 12,
+				"parent" : 0
+			},
+			{
+				"command" : 1,
+				"file" : 0,
+				"line" : 25,
 				"parent" : 0
 			}
 		]
@@ -73,13 +86,17 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -std=gnu++20 -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk"
+					"fragment" : "-g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
+				},
+				{
+					"backtrace" : 4,
+					"fragment" : "-Wno-nullability-completeness"
 				}
 			],
 			"frameworks" : 
 			[
 				{
-					"backtrace" : 7,
+					"backtrace" : 9,
 					"isSystem" : true,
 					"path" : "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk/System/Library/Frameworks/OpenGL.framework"
 				}
@@ -87,16 +104,21 @@
 			"includes" : 
 			[
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"path" : "/Users/vyacheslav/.brew/opt/glfw/include"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 6,
 					"path" : "/Users/vyacheslav/.brew/opt/assimp/include"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"path" : "/Users/vyacheslav/SSE3_OpenGL/include"
+				},
+				{
+					"backtrace" : 8,
+					"isSystem" : true,
+					"path" : "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1"
 				}
 			],
 			"language" : "CXX",
@@ -118,13 +140,17 @@
 			"compileCommandFragments" : 
 			[
 				{
-					"fragment" : "-g -arch arm64 -isysroot /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk"
+					"fragment" : "-g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk"
+				},
+				{
+					"backtrace" : 4,
+					"fragment" : "-Wno-nullability-completeness"
 				}
 			],
 			"frameworks" : 
 			[
 				{
-					"backtrace" : 7,
+					"backtrace" : 9,
 					"isSystem" : true,
 					"path" : "/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk/System/Library/Frameworks/OpenGL.framework"
 				}
@@ -132,16 +158,21 @@
 			"includes" : 
 			[
 				{
-					"backtrace" : 4,
+					"backtrace" : 5,
 					"path" : "/Users/vyacheslav/.brew/opt/glfw/include"
 				},
 				{
-					"backtrace" : 5,
+					"backtrace" : 6,
 					"path" : "/Users/vyacheslav/.brew/opt/assimp/include"
 				},
 				{
-					"backtrace" : 6,
+					"backtrace" : 7,
 					"path" : "/Users/vyacheslav/SSE3_OpenGL/include"
+				},
+				{
+					"backtrace" : 8,
+					"isSystem" : true,
+					"path" : "/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1"
 				}
 			],
 			"language" : "C",

@@ -2,10 +2,14 @@ cmake_minimum_required(VERSION 3.10)
 set(CMAKE_OSX_ARCHITECTURES "arm64")
 project(sse3)
 
-set(CMAKE_OSX_SYSROOT "/Users/vyacheslav/Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk" CACHE STRING "macOS SDK path")
-set(CMAKE_XCODE_VERSION 15.5)
+execute_process(COMMAND xcrun --show-sdk-path OUTPUT_VARIABLE MACOS_SDK_PATH OUTPUT_STRIP_TRAILING_WHITESPACE)
+set(CMAKE_OSX_SYSROOT "${MACOS_SDK_PATH}")
+set(CMAKE_XCODE_VERSION 16.4)
+add_compile_options(-Wno-nullability-completeness)
 
 set(CMAKE_CXX_STANDARD 20)
+
+include_directories(BEFORE SYSTEM "${CMAKE_OSX_SYSROOT}/usr/include/c++/v1")
 
 find_package(OpenGL REQUIRED)
 

@@ -13,16 +13,32 @@ public:
     double averageRadius;
     double equatorialRadius;
     double polarRadius;
+    float axialTilt;
+    double rotationSpeed;
+    std::string albedoTexPath;
+    std::string metallicTexPath;
+    std::string roughnessTexPath;
+    std::string heightTexPath;
+    std::string normalTexPath;
     double mass;
 
-    glm::vec3 velocity;
-    glm::vec3 sqrDstVec;
-    double sqrDst;
-    glm::vec3 forceDir;
-    glm::vec3 acceleration;
+    glm::vec3 velocity = glm::vec3(0.0f);
+    glm::vec3 sqrDstVec = glm::vec3(0.0f);
+    double sqrDst = 0.0;
+    glm::vec3 forceDir = glm::vec3(0.0f);
+    glm::vec3 acceleration = glm::vec3(0.0f);
+    glm::vec3 totalAcceleration = glm::vec3(0.0f);
 
-    CelestialBody(glm::vec3 position, glm::vec3 velocity, double averageRadius, double equatorialRadius, double polarRadius, double gravityAcceleration) {
-        this->position.x = position.x*1000.0f; // convert to meters (positions and velocities in kilometers, 1 unit = 1 meter, convert to units by multiplying by 1000)
+    CelestialBody()
+        : position(0.0f), velocity(0.0f), averageRadius(0), equatorialRadius(0), polarRadius(0), gravityAcceleration(0), axialTilt(0.0f), rotationSpeed(0.0f) {}
+        //, albedoTexPath(""), roughnessTexPath(""), metallicTexPath(""), heightTexPath(""), normalTexPath("")
+
+    CelestialBody(glm::vec3 position, glm::vec3 velocity, double averageRadius, double equatorialRadius, double polarRadius, double gravityAcceleration, float axialTilt, double rotationSpeed)
+        : position(position*1000.0f), velocity(velocity*1000.0f), averageRadius(averageRadius), equatorialRadius(equatorialRadius), polarRadius(polarRadius), gravityAcceleration(gravityAcceleration), axialTilt(axialTilt), rotationSpeed(rotationSpeed)
+    {
+        this->mass = calculateMass();
+    }
+        /*this->position.x = position.x*1000.0f; // convert to meters (positions and velocities in kilometers, 1 unit = 1 meter, convert to units by multiplying by 1000)
         this->position.y = position.y*1000.0f; // swap Z and Y coordinates because of Horizons' Z up coordinate
         this->position.z = position.z*1000.0f;
         this->velocity = velocity*1000.0f;
@@ -31,7 +47,7 @@ public:
         this->polarRadius = polarRadius;
         this->gravityAcceleration = gravityAcceleration;
         this->mass = calculateMass();
-    }
+    }*/
 
     double calculateMass() {
         return this->gravityAcceleration * this->averageRadius * this->averageRadius / G;
@@ -57,6 +73,7 @@ public:
             this->acceleration.z = this->forceDir.z * ((G * body.mass) / this->sqrDst);
 
             this->velocity += this->acceleration * deltaTime;
+            this->totalAcceleration += this->acceleration;
         }
     }
 

@@ -59,6 +59,7 @@
         "filesystem": "cpp",
         "metal_texture_common": "cpp",
         "__config": "cpp",
-        "ostream": "cpp"
+        "ostream": "cpp",
+        "cstddef": "cpp"
     },
 }
