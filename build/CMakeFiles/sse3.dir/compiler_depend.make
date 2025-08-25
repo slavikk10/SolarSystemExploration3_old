@@ -26,6 +26,7 @@ CMakeFiles/sse3.dir/main.cpp.o: /Users/vyacheslav/SSE3_OpenGL/main.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/Availability.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityInternal.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityInternalLegacy.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityVersions.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/TargetConditionals.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/___wctype.h \
@@ -960,6 +961,7 @@ CMakeFiles/sse3.dir/main.cpp.o: /Users/vyacheslav/SSE3_OpenGL/main.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/pthread/sched.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/runetype.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sched.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/setjmp.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stddef.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stdint.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stdio.h \
@@ -1104,6 +1106,23 @@ CMakeFiles/sse3.dir/main.cpp.o: /Users/vyacheslav/SSE3_OpenGL/main.cpp \
   /Users/vyacheslav/.brew/opt/assimp/include/assimp/vector2.inl \
   /Users/vyacheslav/.brew/opt/assimp/include/assimp/vector3.h \
   /Users/vyacheslav/.brew/opt/assimp/include/assimp/vector3.inl \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/ft2build.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/ft2build.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/ftconfig.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/ftheader.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/ftoption.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/ftstdlib.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/integer-types.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/mac-support.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/public-macros.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/freetype.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/fterrdef.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/fterrors.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/ftimage.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/ftmoderr.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/ftsystem.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/fttypes.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/ft2build.h \
   /Users/vyacheslav/.brew/opt/glfw/include/GLFW/glfw3.h \
   /Users/vyacheslav/SSE3_OpenGL/include/KHR/khrplatform.h \
   /Users/vyacheslav/SSE3_OpenGL/include/camera.hpp \
@@ -1454,18 +1473,6 @@ CMakeFiles/sse3.dir/src/glad.c.o: /Users/vyacheslav/SSE3_OpenGL/src/glad.c \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/endian.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/signal.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arm/types.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__config_site \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__configuration/abi.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__configuration/availability.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__configuration/compiler.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__configuration/language.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__configuration/platform.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stdbool.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stdint.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stdio.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stdlib.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/string.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/dlfcn.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/libkern/_OSByteOrder.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/libkern/arm/_OSByteOrder.h \
@@ -1796,8 +1803,6 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/dlfcn.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/stdbool.h:
-
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/stdbool.h:
 
 /Users/vyacheslav/SSE3_OpenGL/src/glad.c:
@@ -1948,8 +1953,6 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 
 /Users/vyacheslav/SSE3_OpenGL/include/glm/detail/type_mat4x4.hpp:
 
-/Users/vyacheslav/SSE3_OpenGL/include/glm/detail/type_mat4x2.inl:
-
 /Users/vyacheslav/SSE3_OpenGL/include/glm/detail/type_mat4x2.hpp:
 
 /Users/vyacheslav/SSE3_OpenGL/include/glm/detail/type_mat3x4.inl:
@@ -1993,6 +1996,24 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 /Users/vyacheslav/SSE3_OpenGL/include/celestialbody.hpp:
 
 /Users/vyacheslav/SSE3_OpenGL/include/KHR/khrplatform.h:
+
+/Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/fttypes.h:
+
+/Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/ftsystem.h:
+
+/Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/ftmoderr.h:
+
+/Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/fterrdef.h:
+
+/Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/freetype.h:
+
+/Users/vyacheslav/SSE3_OpenGL/include/glm/detail/type_mat4x2.inl:
+
+/Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/public-macros.h:
+
+/Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/mac-support.h:
+
+/Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/integer-types.h:
 
 /Users/vyacheslav/.brew/opt/assimp/include/assimp/vector3.inl:
 
@@ -2163,6 +2184,8 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_endian.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/string.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/setjmp.h:
 
 /Users/vyacheslav/SSE3_OpenGL/include/glm/ext/matrix_double4x3.hpp:
 
@@ -2522,6 +2545,8 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/common_reference.h:
 
+/Users/vyacheslav/.brew/opt/freetype/include/freetype2/ft2build.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__atomic/atomic_flag.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__ranges/from_range.h:
@@ -2642,9 +2667,9 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 
 /Users/vyacheslav/SSE3_OpenGL/include/glm/vec2.hpp:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_nl_item.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/any_of.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_nl_item.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/next_permutation.h:
 
@@ -2888,8 +2913,6 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/static_bounded_iter.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/sortable.h:
-
 /Users/vyacheslav/SSE3_OpenGL/include/glm/detail/type_mat2x4.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/lexicographical_compare.h:
@@ -2899,6 +2922,8 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 /Users/vyacheslav/SSE3_OpenGL/include/glm/ext/matrix_double2x4.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/segmented_iterator.h:
+
+/Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/ftheader.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/stdint.h:
 
@@ -3007,10 +3032,6 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__numeric/midpoint.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__fwd/istream.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__atomic/atomic.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/rank.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__concepts/totally_ordered.h:
 
@@ -3130,6 +3151,8 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 
 /Users/vyacheslav/SSE3_OpenGL/include/glm/ext/matrix_float2x3.hpp:
 
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/swap_allocator.h:
 
 /Users/vyacheslav/SSE3_OpenGL/include/glm/ext/vector_int2.hpp:
@@ -3177,6 +3200,8 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 /Users/vyacheslav/SSE3_OpenGL/include/glm/ext/matrix_double2x3_precision.hpp:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__bit_reference:
+
+/Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/fterrors.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/container_adaptor.h:
 
@@ -3372,6 +3397,8 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__charconv/traits.h:
 
+/Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/ftimage.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__charconv/to_chars_result.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/u8path.h:
@@ -3493,6 +3520,8 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__utility/as_const.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_count.h:
+
+/Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/ftconfig.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/transform.h:
 
@@ -3738,6 +3767,8 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_unique.h:
 
+/Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/ftoption.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__memory/allocator_traits.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__mbstate_t.h:
@@ -3775,6 +3806,10 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_types/_uint8_t.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__filesystem/filesystem_error.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/rank.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__atomic/atomic.h:
 
 /Users/vyacheslav/SSE3_OpenGL/include/glm/detail/type_mat4x3.inl:
 
@@ -3834,16 +3869,6 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_generate.h:
 
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/pstl.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__mutex/unique_lock.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/partition.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_fundamental.h:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_for_each.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__ranges/enable_view.h:
 
 /Users/vyacheslav/SSE3_OpenGL/include/glm/ext/matrix_float2x4_precision.hpp:
@@ -3890,6 +3915,8 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__math/gamma.h:
 
+/Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/ftstdlib.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_binary_search.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_time_t.h:
@@ -3919,6 +3946,16 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__format/formatter_output.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/partition_copy.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__type_traits/is_fundamental.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_for_each.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/pstl.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__mutex/unique_lock.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/partition.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/cerrno:
 
@@ -4120,10 +4157,6 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/for_each_segment.h:
 
-/Users/vyacheslav/SSE3_OpenGL/include/glm/ext/vector_int1.hpp:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/for_each_n.h:
-
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/stdarg.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/find_if_not.h:
@@ -4252,17 +4285,13 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/all_of.h:
 
-/Users/vyacheslav/SSE3_OpenGL/include/glm/detail/type_mat3x3.hpp:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/__xlocale.h:
-
-/Users/vyacheslav/SSE3_OpenGL/include/glm/ext/vector_double3.hpp:
-
-/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/for_each.h:
-
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_wchar.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/_time.h:
+
+/Users/vyacheslav/SSE3_OpenGL/include/glm/ext/vector_int1.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/for_each_n.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_find_if_not.h:
 
@@ -4290,6 +4319,14 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/ranges_replace_copy.h:
 
+/Users/vyacheslav/SSE3_OpenGL/include/glm/ext/vector_double3.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__algorithm/for_each.h:
+
+/Users/vyacheslav/SSE3_OpenGL/include/glm/detail/type_mat3x3.hpp:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/__xlocale.h:
+
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__new/global_new_delete.h:
 
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/machine/types.h:
@@ -4303,6 +4340,8 @@ CMakeFiles/sse3.dir/stb_image.cpp.o: /Users/vyacheslav/SSE3_OpenGL/stb_image.cpp
 /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/sys/_types/_gid_t.h:
 
 /Applications/Xcode.app/Contents/Developer/Toolchains/XcodeDefault.xctoolchain/usr/lib/clang/17/include/__stddef_null.h:
+
+/Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__iterator/sortable.h:
 
 /Users/vyacheslav/SSE3_OpenGL/main.cpp:
 

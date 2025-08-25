@@ -5,7 +5,7 @@
 # compile CXX with /usr/bin/clang++
 C_DEFINES = 
 
-C_INCLUDES = -I/Users/vyacheslav/.brew/opt/glfw/include -I/Users/vyacheslav/.brew/opt/assimp/include -I/Users/vyacheslav/SSE3_OpenGL/include -isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk/System/Library/Frameworks
+C_INCLUDES = -I/Users/vyacheslav/.brew/opt/glfw/include -I/Users/vyacheslav/.brew/opt/assimp/include -I/Users/vyacheslav/.brew/opt/freetype/include -I/Users/vyacheslav/SSE3_OpenGL/include -iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk/System/Library/Frameworks
 
 C_FLAGSarm64 = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -Wno-nullability-completeness
 
@@ -13,7 +13,7 @@ C_FLAGS = -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacO
 
 CXX_DEFINES = 
 
-CXX_INCLUDES = -I/Users/vyacheslav/.brew/opt/glfw/include -I/Users/vyacheslav/.brew/opt/assimp/include -I/Users/vyacheslav/SSE3_OpenGL/include -isystem /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1 -iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk/System/Library/Frameworks
+CXX_INCLUDES = -I/Users/vyacheslav/.brew/opt/glfw/include -I/Users/vyacheslav/.brew/opt/assimp/include -I/Users/vyacheslav/.brew/opt/freetype/include -I/Users/vyacheslav/SSE3_OpenGL/include -iframework /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk/System/Library/Frameworks
 
 CXX_FLAGSarm64 = -g -std=gnu++20 -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk -Wno-nullability-completeness
 

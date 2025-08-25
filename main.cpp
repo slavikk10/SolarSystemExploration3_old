@@ -36,6 +36,9 @@
 #include <thread>
 #include <atomic>
 
+#include <freetype2/ft2build.h>
+#include <freetype2/freetype/freetype.h>
+
 std::vector<int> clientUIDs(1000000);
 
 std::unordered_map<int, glm::dvec3> playerPositions;
@@ -62,6 +65,8 @@ void loadHDRtexture(const char* hdrPath, Shader& equirectangularShader, glm::mat
 void renderQuad(float scale, float z_offset);
 void renderSphere(bool patches);
 
+void RenderText(Shader &s, std::string text, float x, float y, float scale, glm::vec3 color);
+
 // settings
 unsigned int SCR_WIDTH = 1920;
 unsigned int SCR_HEIGHT = 1040;
@@ -84,6 +89,25 @@ int timestamp;
 
 float pitch, yaw, roll;
 glm::vec3 ndv;
+
+float throttle = 0.0f;
+bool enginesOn = false;
+float fuelConsumption; // liters/s
+float fuel = 3000000.0f; // in liters
+
+
+struct Character {
+    unsigned int TextureID;  // ID handle of the glyph texture
+    glm::ivec2   Size;       // Size of glyph
+    glm::ivec2   Bearing;    // Offset from baseline to left/top of glyph
+    unsigned int Advance;    // Offset to advance to next glyph
+};
+
+std::map<char, Character> Characters;
+
+
+// text VBO and VAO
+unsigned int textVBO, textVAO;
 
 int main(int argc, char* argv[]) {
     // check if server or client
@@ -183,12 +207,77 @@ int main(int argc, char* argv[]) {
         return -1;
     }
 
+    // initialize freetype
+    FT_Library ft;
+    if (FT_Init_FreeType(&ft))
+    {
+        std::cout << "ERROR::FREETYPE: Could not init FreeType Library" << std::endl;
+        return -1;
+    }
+
+    FT_Face face;
+    if (FT_New_Face(ft, getFilePath("resources/fonts/sans-serif.ttf").c_str(), 0, &face))
+    {
+        std::cout << "ERROR::FREETYPE: Failed to load font" << std::endl;  
+        return -1;
+    }
+
+    FT_Set_Pixel_Sizes(face, 0, 48);
+
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1); // disable byte-alignment restriction
+  
+    for (unsigned char c = 0; c < 128; c++)
+    {
+        // load character glyph 
+        if (FT_Load_Char(face, c, FT_LOAD_RENDER))
+        {
+            std::cout << "ERROR::FREETYTPE: Failed to load Glyph" << std::endl;
+            continue;
+        }
+        // generate texture
+        unsigned int texture;
+        glGenTextures(1, &texture);
+        glBindTexture(GL_TEXTURE_2D, texture);
+        glTexImage2D(
+            GL_TEXTURE_2D,
+            0,
+            GL_RED,
+            face->glyph->bitmap.width,
+            face->glyph->bitmap.rows,
+            0,
+            GL_RED,
+            GL_UNSIGNED_BYTE,
+            face->glyph->bitmap.buffer
+        );
+        // set texture options
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+        glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+        // now store character for later use
+        Character character = {
+            texture, 
+            glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows),
+            glm::ivec2(face->glyph->bitmap_left, face->glyph->bitmap_top),
+            static_cast<unsigned int>(face->glyph->advance.x)
+        };
+        Characters.insert(std::pair<char, Character>(c, character));
+    }
+
+    FT_Done_Face(face);
+    FT_Done_FreeType(ft);
+
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+
+
     float start = glfwGetTime();
 
     // configure global opengl state
     // -----------------------------
     glEnable(GL_DEPTH_TEST);
     glEnable(GL_TEXTURE_CUBE_MAP_SEAMLESS);
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 
     glPatchParameteri(GL_PATCH_VERTICES, 3);
 
@@ -205,6 +294,8 @@ int main(int argc, char* argv[]) {
     Shader prefilterShader(getFilePath("shaders/pre-filter/pre-filter.vert").c_str(), getFilePath("shaders/pre-filter/pre-filter.frag").c_str(), getFilePath("shaders/pre-filter/pre-filter.geom").c_str());
     Shader skyboxShader(getFilePath("shaders/skybox/skybox.vert").c_str(), getFilePath("shaders/skybox/skybox.frag").c_str(), getFilePath("shaders/skybox/skybox.geom").c_str());
     Shader hdrShader(getFilePath("shaders/hdr/hdr.vert").c_str(), getFilePath("shaders/hdr/hdr.frag").c_str(), getFilePath("shaders/hdr/hdr.geom").c_str());
+
+    Shader textShader(getFilePath("shaders/text/text.vert").c_str(), getFilePath("shaders/text/text.frag").c_str());
 
     // set up vertex data (and buffer(s)) and configure vertex attributes
     // ------------------------------------------------------------------
@@ -465,6 +556,18 @@ int main(int argc, char* argv[]) {
     glBufferData(GL_ARRAY_BUFFER, sizeof(lightVertices), &lightVertices, GL_STATIC_DRAW);
     glEnableVertexAttribArray(0);
     glVertexAttribPointer(0, 3, GL_FLOAT, GL_FALSE, 3 * sizeof(float), (void*)0);
+
+
+    // text VAO and VBO
+    glGenBuffers(1, &textVBO);
+    glGenVertexArrays(1, &textVAO);
+    glBindVertexArray(textVAO);
+    glBindBuffer(GL_ARRAY_BUFFER, textVBO);
+    glBufferData(GL_ARRAY_BUFFER, 6 * 4 * sizeof(float), NULL, GL_DYNAMIC_DRAW);
+    glEnableVertexAttribArray(0);
+    glVertexAttribPointer(0, 4, GL_FLOAT, GL_FALSE, 4 * sizeof(float), 0);
+    glBindVertexArray(0);
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
 
     // generate depth map framebuffer
     /*unsigned int depthCubemapFBO;
@@ -781,7 +884,7 @@ int main(int argc, char* argv[]) {
             parsePlanetJSON("resources/planets/earth.json"),
             parsePlanetJSON("resources/planets/moon.json"),
             parsePlanetJSON("resources/planets/mars.json"),
-            CelestialBody(glm::vec3(1.325642404204230E+08, 2.593482662561163E+04, -7.248338623823936E+07+6378.137+1000.0), glm::vec3(1.364897762669466E+01+8, -7.501512110188457E-04, 2.612917605635382E+01), 1.81, 1.81, 1.81, 0.0000000014, 0.0, 0.0), // Player
+            CelestialBody(glm::vec3(1.325642404204230E+08, 2.593482662561163E+04, -7.248338623823936E+07+6378.137+1000.0), glm::vec3(1.364897762669466E+01, -7.501512110188457E-04, 2.612917605635382E+01), 1.81, 1.81, 1.81, 0.0000000014, 0.0, 0.0), // Player
             /*CelestialBody(glm::vec3(-4.155962876379675e+10, -2.252909919162691e+09,  7.674747027447987e+11), glm::vec3(-1.319807488636713e+4, -5.516948900142156e-4, -8.347507826614081e-5), 71492000.0, 24.79), // Jupiter
             CelestialBody(glm::vec3( 1.426000189864588e+12, -5.468390271451207e+10, -1.203550185774606e+11), glm::vec3( 2.775345470427069e-4, -1.774901403126501e-4,  9.603681056096420e+3), 58232000.0, 10.44), // Saturn
             CelestialBody(glm::vec3( 1.573711616842715e+12, -1.125450741055036e+10,  2.459155382854037e+12), glm::vec3(-5.786230412012094e+3,  8.734538058380403e-6,  3.353286525767898e+3), 25362000.0, 8.690), // Uranus
@@ -888,35 +991,35 @@ int main(int argc, char* argv[]) {
             deltaTime = 0.1f;            
         lastFrame = currentFrame;
 
-        //std::cout << "FPS: " << 1.0f / deltaTime << std::endl;
+        float fps = 1.0f / deltaTime;
 
         for (auto &body : bodies) {
-            body.updateVelocity(bodies, deltaTime*100);
+            body.updateVelocity(bodies, deltaTime*10000);
         }
 
         // calculate NDV
-        ndv.x = -camera.GetViewMatrix()[2][0];
-        ndv.y = -camera.GetViewMatrix()[2][1];
+        ndv.x = -camera.GetViewMatrix()[0][2];
+        ndv.y = -camera.GetViewMatrix()[1][2];
         ndv.z = -camera.GetViewMatrix()[2][2];
 
         ndv = glm::normalize(ndv);
 
-        // calculate thrust acceleration of the rocket and calculate total acceleration
-        glm::vec3 thrustAccel = 100000.0f * ndv;
-        glm::vec3 totalAccel = bodies[6].totalAcceleration + thrustAccel;
-
-        //bodies[6].velocity += totalAccel * (deltaTime);
-
-        for (auto &body : bodies) {
-            body.updatePosition(deltaTime*100);
-        }
-
-        //camera.Position = glm::dvec3(bodies[3].position.x/sscale, bodies[3].position.y/sscale+6388137.0, bodies[3].position.z/sscale);
-        camera.Position = glm::vec3(bodies[6].position.x/sscale, bodies[6].position.y/sscale, bodies[6].position.z/sscale);
+        camera.Position = glm::dvec3(bodies[4].position.x/sscale, bodies[4].position.y/sscale+6388137.0, bodies[4].position.z/sscale);
+        //camera.Position = glm::vec3(bodies[6].position.x/sscale, bodies[6].position.y/sscale, bodies[6].position.z/sscale);
 
         // input
         // -----
         processInput(window);
+
+        // calculate thrust acceleration of the rocket and calculate total acceleration
+        glm::vec3 thrustAccel = 1.5f * ndv;
+        glm::vec3 totalAccel = bodies[6].totalAcceleration + thrustAccel;
+
+        bodies[6].velocity += throttle/100 * (totalAccel * (deltaTime*100));
+
+        for (auto &body : bodies) {
+            body.updatePosition(deltaTime*10000);
+        }
 
         glClearColor(0.0f, 0.0f, 0.0f, 1.0f);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -927,6 +1030,7 @@ int main(int argc, char* argv[]) {
             glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
             glm::mat4 projection = glm::perspective(glm::radians(camera.Zoom), (float)SCR_WIDTH / (float)SCR_HEIGHT, 0.1f, 100000000000000000.0f); // 100 quintillion meters far plane (1e17, or 100 trillion (1e14) km)
+            glm::mat4 orthoProjection = glm::ortho(0.0f, (float)SCR_WIDTH, 0.0f, (float)SCR_HEIGHT);
             glm::mat4 view = camera.GetViewMatrix();
 
             shader.use();
@@ -1249,6 +1353,8 @@ int main(int argc, char* argv[]) {
             
             // disable writing to depth buffer
             glDepthMask(GL_FALSE);
+            // disable blending
+            glDisable(GL_BLEND);
 
             atmosphereShader.setVec3("planetWorldPos", glm::vec3(bodies[3].position.x/sscale - camera.Position.x, bodies[3].position.y/sscale - camera.Position.y, bodies[3].position.z/sscale - camera.Position.z));
             atmosphereShader.setFloat("planetRadius", bodies[3].averageRadius/sscale);
@@ -1299,32 +1405,43 @@ int main(int argc, char* argv[]) {
                 lightShader.setMat4("model", model);
                 renderSphere(false);
             }
+
+            // enable blending
+            // ---------------
+            glEnable(GL_BLEND);
+
+            // calculate fuel consumption and update fuel left
+            // -----------------------------------------------
+            fuelConsumption = throttle/100 * 12890.0f;
+            if (enginesOn)
+            {
+                fuel -= fuelConsumption * deltaTime;
+                if (fuel <= 0.0f)
+                {
+                    fuel = 0.0f;
+                    enginesOn = false; 
+                    throttle = 0.0f;
+                }
+            }
+
+            // render text
+            // -----------
+            std::string fps_s = "FPS: " + std::to_string(fps);
+            std::string throttle_s = "Throttle: " + std::to_string(throttle) + "%";
+            std::string fuel_s = "Fuel: " + std::to_string(fuel / 100000.0f * 100.0f) + "%"; // divide the left fuel by original fuel and multiply by 100 to get in percents
+            textShader.use();
+            textShader.setMat4("projection", orthoProjection); // switch to orthographic projection for rending text
+            RenderText(textShader, fps_s, 5.0f, 950.0f, 0.3f, glm::vec3(1.0f)); // render at top-left corner at 0.3 size with white color
+            RenderText(textShader, throttle_s, SCR_WIDTH/3, 10.0f, 0.5f, glm::vec3(1.0f));
+            RenderText(textShader, enginesOn ? "Engines: on" : "Engines: off", SCR_WIDTH/2, 10.0f, 0.5f, enginesOn ? glm::vec3(0.0f, 1.0f, 0.0f) : glm::vec3(1.0f, 0.0f, 0.0f));
+            RenderText(textShader, fuel_s, SCR_WIDTH/2+SCR_WIDTH/3, 10.0f, 0.5f, glm::vec3(1.0f));
+            RenderText(textShader, "NDV: " + std::to_string(ndv.x) + ", " + std::to_string(ndv.y) + ", " + std::to_string(ndv.z), SCR_WIDTH/2, 950, 0.3f, glm::vec3(1.0f));
         glBindFramebuffer(GL_FRAMEBUFFER, 0);
-
-        /*glDepthFunc(GL_LEQUAL);
-        // setup matrices and other values
-        skyboxShader.use();
-        skyboxShader.setFloat("exposure", 1.0);
-        // always put skybox on the player (camera) position
-        view = glm::mat4(glm::mat3(camera.GetViewMatrix()));
-        skyboxShader.setMat4("view", view);
-        skyboxShader.setMat4("projection", projection);
-
-        glActiveTexture(GL_TEXTURE0);
-        glBindTexture(GL_TEXTURE_CUBE_MAP, cubemapTexture);
-            
-        glBindVertexArray(skyboxVAO);
-        glDrawArrays(GL_TRIANGLES, 0, 36);
-
-        glDepthFunc(GL_LESS);*/
 
         hdrShader.use();
         glActiveTexture(GL_TEXTURE0);
         glBindTexture(GL_TEXTURE_2D, colorBuffer);
         renderQuad(1.0f, -1.0f);
-
-        //ImGui::Render();
-        //ImGui_ImplOpenGL3_RenderDrawData(ImGui::GetDrawData());
 
         // glfw: swap buffers and poll IO events (keys pressed/released, mouse moved etc.)
         // -------------------------------------------------------------------------------
@@ -1366,6 +1483,22 @@ void processInput(GLFWwindow *window)
         camera.ProcessKeyboard(LEFT, deltaTime);
     if (glfwGetKey(window, GLFW_KEY_D) == GLFW_PRESS)
         camera.ProcessKeyboard(RIGHT, deltaTime);
+
+    // rocket controls
+    if (glfwGetKey(window, GLFW_KEY_T) == GLFW_PRESS)
+        enginesOn = !enginesOn;
+    if (glfwGetKey(window, GLFW_KEY_R) == GLFW_PRESS && throttle != 100.0f)
+    {
+        throttle += 50.0f * deltaTime;
+        if (throttle > 100.0f)
+            throttle = 100.0f;
+    }
+    if (glfwGetKey(window, GLFW_KEY_F) == GLFW_PRESS && throttle != 0.0f)
+    {
+        throttle -= 50.0f * deltaTime;
+        if (throttle < 0.0f)
+            throttle = 0.0f;
+    }
 }
 
 // glfw: whenever the window size changed (by OS or user resize) this callback function executes
@@ -1753,4 +1886,43 @@ void loadHDRtexture(const char* hdrPath, Shader& equirectangularShader, glm::mat
                 glFramebufferTexture2D(GL_FRAMEBUFFER, GL_COLOR_ATTACHMENT0, GL_TEXTURE_2D, brdfLUTTexture, 0);
 
                 glBindFramebuffer(GL_FRAMEBUFFER, 0);
+}
+
+void RenderText(Shader &s, std::string text, float x, float y, float scale, glm::vec3 color)
+{
+    s.use();
+    s.setVec3("textColor", color);
+    glActiveTexture(GL_TEXTURE0);
+    glBindVertexArray(textVAO);
+
+    std::string::const_iterator c;
+    for (c = text.begin(); c != text.end(); c++)
+    {
+        Character ch = Characters[*c];
+
+        float xpos = x + ch.Bearing.x * scale;
+        float ypos = y - (ch.Size.y - ch.Bearing.y) * scale;
+
+        float w = ch.Size.x * scale;
+        float h = ch.Size.y * scale;
+
+        float vertices[6][4] = {
+            { xpos,     ypos + h,   0.0f, 0.0f },            
+            { xpos,     ypos,       0.0f, 1.0f },
+            { xpos + w, ypos,       1.0f, 1.0f },
+
+            { xpos,     ypos + h,   0.0f, 0.0f },
+            { xpos + w, ypos,       1.0f, 1.0f },
+            { xpos + w, ypos + h,   1.0f, 0.0f }           
+        };
+
+        glBindTexture(GL_TEXTURE_2D, ch.TextureID);
+        glBindBuffer(GL_ARRAY_BUFFER, textVBO);
+        glBufferSubData(GL_ARRAY_BUFFER, 0, sizeof(vertices), vertices);
+        glBindBuffer(GL_ARRAY_BUFFER, 0);
+
+        glDrawArrays(GL_TRIANGLES, 0, 6);
+
+        x += (ch.Advance >> 6) * scale;
+    }
 }

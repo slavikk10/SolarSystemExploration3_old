@@ -1419,4 +1419,23 @@ CMakeFiles/sse3.dir/main.cpp.o: /Users/vyacheslav/SSE3_OpenGL/main.cpp \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/seed_seq.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/student_t_distribution.h \
   /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/c++/v1/__random/weibull_distribution.h \
-  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arpa/inet.h
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/arpa/inet.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/ft2build.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/ftheader.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/freetype.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/../ft2build.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/fttypes.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/ftconfig.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/../../ft2build.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/ftoption.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/ftstdlib.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/setjmp.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/integer-types.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/public-macros.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/config/mac-support.h \
+  /Library/Developer/CommandLineTools/SDKs/MacOSX.sdk/usr/include/AvailabilityMacros.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/ftsystem.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/ftimage.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/fterrors.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/ftmoderr.h \
+  /Users/vyacheslav/.brew/opt/freetype/include/freetype2/freetype/fterrdef.h

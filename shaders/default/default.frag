@@ -303,35 +303,3 @@ vec3 calcSpotLight(SpotLight light, vec3 normal, vec3 viewDir)
 
     return finalTexCoords;
 }*/
-
-float DistGGX(vec3 N, vec3 H, float a) {
-    float a2 = a*a;
-    float NdotH = max(dot(N, H), 0.0);
-    float NdotH2 = NdotH*NdotH;
-    
-    float nom = a2;
-    float denom = (NdotH2 * (a2 - 1.0) + 1.0);
-    denom = 3.14 * denom * denom;
-
-    return nom / denom;
-}
-
-float Gsub_GGX(vec3 N, vec3 V, float k) {
-    float NdotV = dot(N, V);
-
-    float nom = NdotV;
-    float denom = NdotV*(1.0 - k) + k;
-
-    return nom / denom;
-}
-
-float G_GGX(vec3 N, vec3 V, vec3 L, float k) {
-    float Gsub1 = Gsub_GGX(N, V, k);
-    float Gsub2 = Gsub_GGX(N, L, k);
-
-    return Gsub1*Gsub2;
-}
-
-vec3 Fresnel(float cosTheta, vec3 F0) {
-    return F0 + (1.0 - F0)*pow(1.0 - cosTheta, 5.0);
-}

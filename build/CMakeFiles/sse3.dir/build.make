@@ -129,6 +129,7 @@ sse3: CMakeFiles/sse3.dir/stb_image.cpp.o
 sse3: CMakeFiles/sse3.dir/build.make
 sse3: /Users/vyacheslav/.brew/opt/glfw/lib/libglfw.3.dylib
 sse3: /Users/vyacheslav/.brew/opt/assimp/lib/libassimp.5.4.3.dylib
+sse3: /Users/vyacheslav/.brew/opt/freetype/lib/libfreetype.6.dylib
 sse3: /Applications/Xcode.app/Contents/Developer/Platforms/MacOSX.platform/Developer/SDKs/MacOSX15.5.sdk/System/Library/Frameworks/OpenGL.framework
 sse3: CMakeFiles/sse3.dir/link.txt
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/Users/vyacheslav/SSE3_OpenGL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Linking CXX executable sse3"
