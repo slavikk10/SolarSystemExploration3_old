@@ -107,7 +107,7 @@ void main() {
     if (dstThroughAtmosphere > 0) {
         vec3 pointInAtmosphere = vec3(0.0) + viewDir * hitInfo.x;
         vec3 light = calculateLight(pointInAtmosphere, viewDir, min(hitInfo.y, linearDepth - hitInfo.x), texture(colorTex, TexCoords).rgb);
-        FragColor = vec4(light, 0);
+        FragColor = vec4(light, 1.0);
     } else {
         FragColor = originalCol;
     }

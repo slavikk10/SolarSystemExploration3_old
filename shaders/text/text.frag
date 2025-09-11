@@ -9,4 +9,5 @@ void main()
 {
     vec4 sampled = vec4(1.0, 1.0, 1.0, texture(text, TexCoords).r);
     color = sampled * vec4(textColor, 1.0);
+    gl_FragDepth = 0.0;
 }
